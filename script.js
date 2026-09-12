@@ -1,0 +1,15 @@
+const data={library:'The library is open Monday–Saturday, 8:30 AM–6:00 PM. Digital resources are available through the student portal.',canteen:'The campus canteen serves breakfast, lunch, snacks and beverages. Typical hours: 8:00 AM–5:30 PM.',transport:'Campus buses operate on major routes before and after class hours. Check the transport office for today’s live schedule.',attendance:'Your attendance dashboard can show subject-wise attendance and shortage alerts. Connect this demo to your college ERP for live data.',events:'Upcoming events include workshops, hackathons, club activities and placement sessions.',help:'I can help with library, canteen, transport, attendance and events. Ask: “What are the library timings?”'};
+const announcements=[['Internal assessment schedule','Check your department notice board for the latest schedule.'],['Placement training','New aptitude and communication sessions are being planned.'],['Club registration','Students can register for technical and cultural clubs this semester.']];
+const events=[['18 Sep','AI & ML Workshop','Department Seminar Hall'],['25 Sep','Campus Hackathon','Innovation Lab'],['03 Oct','Career Guidance Session','Main Auditorium']];
+const $=s=>document.querySelector(s);
+function render(){
+ $('#announcements').innerHTML=announcements.map(x=>`<div class="notice"><b>${x[0]}</b><p>${x[1]}</p></div>`).join('');
+ $('#events').innerHTML=events.map(x=>`<div class="event"><span class="event-date">${x[0]}</span><b>${x[1]}</b><p>📍 ${x[2]}</p></div>`).join('');
+}
+function answer(q){q=q.toLowerCase();for(const key of Object.keys(data)){if(q.includes(key)||q.includes(key==='transport'?'bus':key)){return data[key]}}if(q.includes('time')||q.includes('timing'))return data.library+' '+data.canteen;return data.help}
+function addMessage(text,type){const el=document.createElement('div');el.className=`message ${type}`;el.textContent=text;$('#chat').appendChild(el);$('#chat').scrollTop=$('#chat').scrollHeight}
+$('#chatForm').addEventListener('submit',e=>{e.preventDefault();const input=$('#chatInput');const q=input.value.trim();if(!q)return;addMessage(q,'user');input.value='';setTimeout(()=>addMessage(answer(q),'bot'),250)});
+function search(){const q=$('#searchInput').value.trim().toLowerCase();if(!q){$('#searchResult').textContent='Type something to search.';return}const hits=Object.keys(data).filter(k=>q.includes(k)||k.includes(q)|| (q==='bus'&&k==='transport'));$('#searchResult').textContent=hits.length?`Found: ${hits.join(', ')} — ${answer(q)}`:`No exact match. Try library, canteen, transport, attendance or events.`}
+$('#searchBtn').addEventListener('click',search);$('#searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')search()});
+document.querySelectorAll('.quick').forEach(b=>b.addEventListener('click',()=>{$('#searchInput').value=b.dataset.query;search();$('#chatInput').value=`Tell me about ${b.dataset.query}`;$('#chatForm').requestSubmit()}));
+$('#themeBtn').addEventListener('click',()=>{document.body.classList.toggle('dark');$('#themeBtn').textContent=document.body.classList.contains('dark')?'☀️':'🌙'});render();

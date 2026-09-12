@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Campus Assistant</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">🎓</span><div><h1>Smart Campus</h1><p>Assistant</p></div></div>
+    <button id="themeBtn" class="icon-btn" aria-label="Toggle theme">🌙</button>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div><span class="badge">AI CAMPUS HUB</span><h2>Hello, Student 👋</h2><p>Find campus information, events, services and answers in one place.</p></div>
+      <div class="hero-card"><strong>Campus Status</strong><span>🟢 All systems operational</span></div>
+    </section>
+
+    <section class="search-box">
+      <input id="searchInput" type="search" placeholder="Search library, bus, canteen, events..." autocomplete="off">
+      <button id="searchBtn">Search</button>
+    </section>
+    <p id="searchResult" class="result"></p>
+
+    <section class="quick-grid">
+      <button class="quick" data-query="library"><span>📚</span><b>Library</b><small>Books & timings</small></button>
+      <button class="quick" data-query="canteen"><span>🍴</span><b>Canteen</b><small>Menu & hours</small></button>
+      <button class="quick" data-query="transport"><span>🚌</span><b>Transport</b><small>Bus routes</small></button>
+      <button class="quick" data-query="attendance"><span>📊</span><b>Attendance</b><small>Check status</small></button>
+    </section>
+
+    <div class="columns">
+      <section class="panel"><div class="panel-title"><h3>📢 Announcements</h3><span>Latest</span></div><div id="announcements"></div></section>
+      <section class="panel"><div class="panel-title"><h3>📅 Upcoming Events</h3><span>View all</span></div><div id="events"></div></section>
+    </div>
+
+    <section class="assistant panel">
+      <div class="panel-title"><h3>🤖 Campus Assistant</h3><span class="online">● Online</span></div>
+      <div id="chat" class="chat"><div class="message bot">Hi! I can help with library, canteen, transport, attendance, events and campus services. Try asking me something.</div></div>
+      <form id="chatForm" class="chat-form"><input id="chatInput" placeholder="Ask your campus assistant..." required><button>Send</button></form>
+    </section>
+  </main>
+  <footer>Smart Campus Assistant • Demo Project</footer>
+  <script src="script.js"></script>
+</body>
+</html>
